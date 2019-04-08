@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+
+void initialiser_joueur(perso *p)
+{
+	p->vi = 5;
+}
+
+void vie(perso *p)
+{
+	p->vi--;
+}
+
+void score(perso p , int point)
+{
+int pomme,fleur,aimant;
+ if(p = pomme)
+ {
+   point = 20;
+ }
+
+ else 
+   if(p = fleur)
+    {
+      point = -15;
+    }
+  else
+     if(p = aimant)
+      {
+       point = 100;
+      }
+}     
+
+

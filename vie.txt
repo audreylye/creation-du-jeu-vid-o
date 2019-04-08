@@ -1,0 +1,22 @@
+void drawHud(void)
+{
+    //On crée une variable qui contiendra notre texte (jusqu'à 200 caractères, y'a de la marge ;) ).
+    char text[200];
+ 
+    int i;
+ 
+    //Affiche le nombre de coeurs
+    //On crée une boucle pour afficher de 1 à 3 coeurs
+    //selon la vie, avec un décalage de 32 pixels
+    for( i = 0; i < player.life; i++)
+    {
+        // Calcul pour découper le tileset comme dans la fonction drawMap()
+        int ysource = TILE_POWER_UP_FIN / 10 * TILE_SIZE;
+        int xsource = TILE_POWER_UP_FIN % 10 * TILE_SIZE;
+ 
+        drawTile(map.tileSet, 60 + i * 32, 20, xsource, ysource);
+    }
+ 
+ 
+    /* Affiche le nombre de vies en bas à droite */
+    drawImage(jeu.HUD_vie, 480, 410);
