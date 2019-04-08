@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
-#include "scroll.h"
 
 void scroll (SDL_Rect *camera,int direction,SDL_Rect *coll,SDL_Rect positionBack1,SDL_Rect positionBack2,SDL_Surface *collisionMap) 
 {
@@ -70,49 +68,35 @@ int main(int argc, char *argv[])
     SDL_Surface *ecran = NULL, *surface1 = NULL, *surface2 = NULL, *background= NULL;
     SDL_Event event;
     SDL_Rect position1, position2,positionback,positionback2,camera1;
-    int continuer = 1,i=0;
-    char temps[20],v[20];
+    int continuer = 1;
     SDL_Init(SDL_INIT_VIDEO);
     ecran = SDL_SetVideoMode(300, 300, 32, SDL_HWSURFACE);
-   TTF_Init();
-TTF_Font *police = NULL;
-     SDL_Color noire={255,255,255};
-SDL_Surface *time=NULL, *vies[6];
-SDL_Rect positionT;
-positionT.x=150;
-	positionT.y=0;
+   
     position1.x=150;
     position1.y=150;
     position2.x=600;
     position2.y=0;
     camera1.w=300;
     camera1.h=300;
-    for(i=0;i<6;i++)
-	{
-		sprintf(v,"vie/%d.png",i);
-		vies[i]=IMG_Load(v);
-	}
+    
     camera1.x=0;
     camera1.y=0;
-    police = TTF_OpenFont("de.ttf",20);
+    
 positionback.x = 0;
 	positionback.y = 0;
 positionback2.x = 300;
 	positionback2.y = 0;
-	surface1 =IMG_Load("background.jpg");
+	surface1 = IMG_Load("level1_1.png");
 position2.x=600;
 position2.y=0;
 	background = IMG_Load("joueur1.png");
     SDL_BlitSurface(surface1, &camera1 , ecran, &positionback );
     //SDL_BlitSurface(background, NULL, ecran,&position1 );
-    SDL_BlitSurface(vies[5], &camera1, ecran, &positionback);
     SDL_Flip(ecran);
 
     while(continuer)
     {
-	sprintf(temps,"TIME : %d",SDL_GetTicks());
-	time = TTF_RenderText_Blended(police,temps,noire);
-        SDL_PollEvent(&event);
+        SDL_WaitEvent(&event);
  
         switch(event.type)
         {
@@ -139,14 +123,9 @@ position2.y=0;
 				position1.x+=10;
 			break;
 		}
-
-
+display_scroll(ecran,surface1,camera1);
 		break;
         }
-display_scroll(ecran,surface1,camera1);
-SDL_BlitSurface(vies[5], &camera1, ecran, &positionback);
-SDL_BlitSurface(time, &camera1, ecran, &positionT);
-SDL_Flip(ecran);
     }
     SDL_Quit();
     SDL_FreeSurface(surface1);
